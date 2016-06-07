@@ -51,7 +51,8 @@ export default class CommentBox extends React.Component {
     }
     
     componentDidMount() {
-        this._timer = setInterval(() => this._fetchComments(), 5000);
+        // polling
+        this._timer = setInterval(() => this._fetchComments(), 1000);
     }
     // Run when component is about to be removed
     componentWillUmount() {
