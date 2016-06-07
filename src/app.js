@@ -272,7 +272,7 @@ jQuery(function() {
     <CommentBox />,
     document.getElementById('comment-box'),
     function() {
-        console.timeEnd('react-app');
+        console.log('Ready!');
     }
   );
 })
