@@ -30,7 +30,7 @@ export default class CommentBox extends React.Component {
     _getComments() {
         return this.state.comments.map(( comment ) => {
             return(
-                <Comment author={comment.author} body={comment.body} key={comment.id} />
+                <Comment name={comment.name} body={comment.body} key={comment.id} />
             );
         });
     }
@@ -60,11 +60,11 @@ export default class CommentBox extends React.Component {
     }
     
     render() {
-        let buttonText = 'Show comments';
+        let buttonText = 'Show Comments';
         const comments = this._getComments();
         let commentNodes;
-        if (this.state.showComments) {
-            let buttonText = 'Hide Comments';
+        if (!this.state.showComments) {
+            buttonText = 'Hide comments';
             commentNodes = <div className="comment-list">{comments}</div>;
         }
         return(
@@ -84,7 +84,7 @@ class Comment extends React.Component {
     render() {
         return(
             <div className="comment">
-                <p className="comment-header">{this.props.author}</p>
+                <p className="comment-header">{this.props.name}</p>
                 <p className="comment-body">{this.props.body}</p>
                 <div className="comment-footer">
                     <a href="#" className="comment-footer-delete">
