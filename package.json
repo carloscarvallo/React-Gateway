@@ -1,17 +1,17 @@
 {
-  "name": "babel-with-gulp",
+  "name": "React-Gateway",
   "version": "1.0.0",
-  "description": "Starter code for using Babel with Gulp",
+  "description": "Skeleton for React Application",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "gulp watch"
   },
-  "author": "Carlos Souza <carloshrsouza@gmail.com> (http://csouza.me/)",
+  "author": "Carlos Carvallo <carloscarvallo87@gmail.com> (http://ccarvallo.cc/)",
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/codeschool/babel-with-gulp.git"
+    "url": "git+ssh://git@github.com:carloscarvallo/React-Gateway.git"
   },
   "keywords": [
     "babel",
@@ -19,9 +19,9 @@
     "es2015"
   ],
   "bugs": {
-    "url": "https://github.com/codeschool/babel-with-gulp/issues"
+    "url": "https://github.com/carloscarvallo/React-Gateway/issues"
   },
-  "homepage": "https://github.com/codeschool/babel-with-gulp#readme",
+  "homepage": "https://github.com/carloscarvallo/React-Gateway#readme",
   "devDependencies": {
     "babel-core": "^6.7.6",
     "babel-preset-es2015": "^6.1.18",
