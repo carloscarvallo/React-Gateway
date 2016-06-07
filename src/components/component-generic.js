@@ -7,15 +7,8 @@ export default class CommentBox extends React.Component {
         super();
         this.state = {
             showComments: false,
-            comments: [
-                { id: 1, author: 'Morgan McCircuit', body: 'Great Picture!' },
-                { id: 2, author: 'Bending Bender', body: 'Excellent Stuff' }
-            ]
+            comments: []
         };
-    }
-    // Fetch data from server before component is rendered.
-    componentWillMount() {
-        _fetchComments();
     }
     
     _fetchComments() {
@@ -52,6 +45,18 @@ export default class CommentBox extends React.Component {
         }
     }
     
+    // Fetch data from server before component is rendered.
+    componentWillMount() {
+        this._fetchComments();
+    }
+    
+    componentDidMount() {
+        this._timer = setInterval(() => this._fetchComments(), 5000);
+    }
+    
+    componentWillUmount() {
+        clearInterval(this._timer);
+    }
     
     render() {
         let buttonText = 'Show comments';
