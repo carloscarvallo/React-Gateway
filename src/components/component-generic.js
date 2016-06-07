@@ -6,24 +6,22 @@ export default class CommentBox extends React.Component {
     constructor() {
         super();
         this.state = {
-            showComments: false
+            showComments: false,
+            comments: [
+                { id: 1, author: 'Morgan McCircuit', body: 'Great Picture!' },
+                { id: 2, author: 'Bending Bender', body: 'Excellent Stuff' }
+            ]
         };
     }
     
     _handleClick() {
-        console.log('call');
         this.setState({
             showComments: !this.state.showComments
         });
     }
     
     _getComments() {
-        const commentList = [
-            { id: 1, author: 'Morgan McCircuit', body: 'Great Picture!' },
-            { id: 2, author: 'Bending Bender', body: 'Excellent Stuff' }
-        ];
-        
-        return commentList.map(( comment ) => {
+        return this.state.comments.map(( comment ) => {
             return(
                 <Comment author={comment.author} body={comment.body} key={comment.id} />
             );
