@@ -13,6 +13,20 @@ export default class CommentBox extends React.Component {
             ]
         };
     }
+    // Fetch data from server before component is rendered.
+    componentWillMount() {
+        _fetchComments();
+    }
+    
+    _fetchComments() {
+        jQuery.ajax({
+            method: 'GET',
+            url: 'comments.json',
+            success: (comments) => {
+                this.setState({ comments })
+            }
+        });
+    }
     
     _handleClick() {
         this.setState({
