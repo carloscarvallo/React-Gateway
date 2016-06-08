@@ -3,30 +3,35 @@
     "id": 1,
     "result": "302",
     "protocol": "HTTP",
-    "host": "localhost"
+    "host": "localhost",
+    "url": "/api/fetch"
   },
   {
     "id": 2,
     "result": "200",
     "protocol": "HTTP",
-    "host": "127.0.0.1"
+    "host": "127.0.0.1",
+    "url": "/bacon.js"
   },
   {
     "id": 3,
     "result": "304",
     "protocol": "TCP",
-    "host": "s2.wp.com"
+    "host": "s2.wp.com",
+    "url": "/StreamReceiver/server"
   },
   {
     "id": 4,
     "result": "200",
     "protocol": "HTTP",
-    "host": "lol.com"
+    "host": "lol.com",
+    "url": "/wp-content/themes"
   },
   {
     "id": 5,
     "result": "404",
     "protocol": "HTTP",
-    "host": "forbidden.com"
+    "host": "forbidden.com",
+    "url": "/"
   }
 ]

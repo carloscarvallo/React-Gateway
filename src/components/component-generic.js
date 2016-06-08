@@ -34,8 +34,9 @@ export default class CommentBox extends React.Component {
                     result={comment.result}
                     protocol={comment.protocol}
                     host={comment.host}
-                    key={comment.id}
-                    id={comment.id} />
+                    url={comment.url}
+                    id={comment.id}
+                    key={comment.id} />
             );
         });
     }
@@ -57,7 +58,7 @@ export default class CommentBox extends React.Component {
     
     componentDidMount() {
         // polling
-        this._timer = setInterval(() => this._fetchComments(), 2000);
+        this._timer = setInterval(() => this._fetchComments(), 4000);
     }
     // Run when component is about to be removed
     componentWillUmount() {
@@ -77,6 +78,7 @@ export default class CommentBox extends React.Component {
                             <th>Result</th>
                             <th>Protocol</th>
                             <th>Host</th>
+                            <th>URL</th>
                         </tr>
                     </thead>
                     {comments}
@@ -114,6 +116,7 @@ class Comment extends React.Component {
                     <td>{this.props.result}</td>
                     <td>{this.props.protocol}</td>
                     <td>{this.props.host}</td>
+                    <td>{this.props.url}</td>
                 </tr>
             </tbody>
         );
