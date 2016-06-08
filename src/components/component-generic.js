@@ -70,9 +70,17 @@ export default class CommentBox extends React.Component {
             <div className="comment-box">
                 <h3>Traffic</h3>
                 <h4 className="comment-count">{this._getCommentsTitle( comments.length )}</h4>
-                <div className="comment-list">
+                <table className="table table-striped table-hover ">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Result</th>
+                            <th>Protocol</th>
+                            <th>Host</th>
+                        </tr>
+                    </thead>
                     {comments}
-                </div>
+                </table>
             </div>
         );
     }
@@ -81,18 +89,14 @@ export default class CommentBox extends React.Component {
 class Comment extends React.Component {
     render() {
         return(
-            <div className="comment">
-                <p className="comment-result">{this.props.result}</p>
-                <p className="comment-protocol">{this.props.protocol}</p>
-                <p className="comment-host">{this.props.host}</p>
-                <div className="comment-footer">
-                    {/*
-                    <a href="#" className="comment-footer-delete">
-                        Delete comment
-                    </a>
-                    */}
-                </div>
-            </div>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>{this.props.result}</td>
+                    <td>{this.props.protocol}</td>
+                    <td>{this.props.host}</td>
+                </tr>
+            </tbody>
         );
     }
 }
