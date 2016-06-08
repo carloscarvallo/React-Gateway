@@ -66,19 +66,9 @@ export default class CommentBox extends React.Component {
     render() {
         let buttonText = 'Show Comments';
         const comments = this._getComments();
-        /*
-        let commentNodes;
-        if (!this.state.showComments) {
-            buttonText = 'Hide comments';
-            commentNodes = <div className="comment-list">{comments}</div>;
-        }
-        */
         return(
             <div className="comment-box">
-                {/*
-                <button onClick={this._handleClick.bind(this)}>{buttonText}</button>
-                */}
-                <h3>Comments</h3>
+                <h3>Traffic</h3>
                 <h4 className="comment-count">{this._getCommentsTitle( comments.length )}</h4>
                 <div className="comment-list">
                     {comments}
