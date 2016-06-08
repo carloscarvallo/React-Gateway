@@ -30,7 +30,7 @@ export default class CommentBox extends React.Component {
     _getComments() {
         return this.state.comments.map(( comment ) => {
             return(
-                <Comment name={comment.name} body={comment.body} key={comment.id} />
+                <Comment result={comment.result} protocol={comment.protocol} key={comment.id} />
             );
         });
     }
@@ -84,12 +84,14 @@ class Comment extends React.Component {
     render() {
         return(
             <div className="comment">
-                <p className="comment-header">{this.props.name}</p>
-                <p className="comment-body">{this.props.body}</p>
+                <p className="comment-header">{this.props.result}</p>
+                <p className="comment-body">{this.props.protocol}</p>
                 <div className="comment-footer">
+                    {/*
                     <a href="#" className="comment-footer-delete">
                         Delete comment
                     </a>
+                    */}
                 </div>
             </div>
         );
