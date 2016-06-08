@@ -87,10 +87,19 @@ export default class CommentBox extends React.Component {
 }
 
 class Comment extends React.Component {
+    
+    _getClass( data ) {
+        let classN;
+        if (data == "200") {
+            classN = "success";
+        }
+        return classN;
+    }
+    
     render() {
         return(
             <tbody>
-                <tr>
+                <tr className={this._getClass(this.props.result)}>
                     <td>{this.props.id}</td>
                     <td>{this.props.result}</td>
                     <td>{this.props.protocol}</td>
