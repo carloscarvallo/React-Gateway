@@ -34,7 +34,8 @@ export default class CommentBox extends React.Component {
                     result={comment.result}
                     protocol={comment.protocol}
                     host={comment.host}
-                    key={comment.id} />
+                    key={comment.id}
+                    id={comment.id} />
             );
         });
     }
@@ -64,7 +65,6 @@ export default class CommentBox extends React.Component {
     }
     
     render() {
-        let buttonText = 'Show Comments';
         const comments = this._getComments();
         return(
             <div className="comment-box">
@@ -91,7 +91,7 @@ class Comment extends React.Component {
         return(
             <tbody>
                 <tr>
-                    <td>1</td>
+                    <td>{this.props.id}</td>
                     <td>{this.props.result}</td>
                     <td>{this.props.protocol}</td>
                     <td>{this.props.host}</td>
