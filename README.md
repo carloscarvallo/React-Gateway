@@ -1,7 +1,6 @@
-# Skeleton for React Application
+# React-Gateway
 
-Starter code for transpiling ES2015 (including modules) with Babel, Gulp and Browserify.
-
+HTTP request logger in React
 
 # Installing
 
@@ -12,7 +11,3 @@ Starter code for transpiling ES2015 (including modules) with Babel, Gulp and Bro
 # Using
 
 Run `npm start` from the command line and you are good to go!
-
-The project is currently setup to transpile code under the _/src_ folder using the _/src/app.js_ file as an entry point.
-
-Our resulting code ends up in the `public` directory.
