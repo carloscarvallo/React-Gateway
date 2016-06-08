@@ -16,5 +16,17 @@
     "result": "304",
     "protocol": "TCP",
     "host": "s2.wp.com"
+  },
+  {
+    "id": 4,
+    "result": "200",
+    "protocol": "HTTP",
+    "host": "lol.com"
+  },
+  {
+    "id": 5,
+    "result": "404",
+    "protocol": "HTTP",
+    "host": "forbidden.com"
   }
 ]

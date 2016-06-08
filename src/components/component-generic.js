@@ -42,11 +42,11 @@ export default class CommentBox extends React.Component {
     
     _getCommentsTitle( commentCount ) {
         if (commentCount === 0) {
-            return 'No comments yet';
+            return 'No request yet';
         } else if (commentCount === 1) {
-            return '1 comment';
+            return '1 request';
         } else {
-            return `${commentCount} comments`;
+            return `${commentCount} requests`;
         }
     }
     
@@ -90,8 +90,18 @@ class Comment extends React.Component {
     
     _getClass( data ) {
         let classN;
-        if (data == "200") {
-            classN = "success";
+        switch (data) {
+            case "200":
+                classN = "success";
+                break;
+            case "302":
+                classN = "info";
+                break;
+            case "404":
+                classN = "danger";
+                break;
+            default:
+                classN = "";
         }
         return classN;
     }
