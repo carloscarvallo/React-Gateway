@@ -2,16 +2,19 @@
   {
     "id": 1,
     "result": "302",
-    "protocol": "HTTP"
+    "protocol": "HTTP",
+    "host": "localhost"
   },
   {
     "id": 2,
     "result": "200",
-    "protocol": "HTTP"
+    "protocol": "HTTP",
+    "host": "127.0.0.1"
   },
   {
     "id": 3,
     "result": "304",
-    "protocol": "TCP"
+    "protocol": "TCP",
+    "host": "s2.wp.com"
   }
 ]

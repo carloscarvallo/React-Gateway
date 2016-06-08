@@ -30,7 +30,11 @@ export default class CommentBox extends React.Component {
     _getComments() {
         return this.state.comments.map(( comment ) => {
             return(
-                <Comment result={comment.result} protocol={comment.protocol} key={comment.id} />
+                <Comment 
+                    result={comment.result}
+                    protocol={comment.protocol}
+                    host={comment.host}
+                    key={comment.id} />
             );
         });
     }
@@ -52,7 +56,7 @@ export default class CommentBox extends React.Component {
     
     componentDidMount() {
         // polling
-        this._timer = setInterval(() => this._fetchComments(), 1000);
+        this._timer = setInterval(() => this._fetchComments(), 2000);
     }
     // Run when component is about to be removed
     componentWillUmount() {
@@ -62,18 +66,22 @@ export default class CommentBox extends React.Component {
     render() {
         let buttonText = 'Show Comments';
         const comments = this._getComments();
+        /*
         let commentNodes;
         if (!this.state.showComments) {
             buttonText = 'Hide comments';
             commentNodes = <div className="comment-list">{comments}</div>;
         }
+        */
         return(
             <div className="comment-box">
+                {/*
                 <button onClick={this._handleClick.bind(this)}>{buttonText}</button>
+                */}
                 <h3>Comments</h3>
                 <h4 className="comment-count">{this._getCommentsTitle( comments.length )}</h4>
                 <div className="comment-list">
-                    {commentNodes}
+                    {comments}
                 </div>
             </div>
         );
@@ -84,8 +92,9 @@ class Comment extends React.Component {
     render() {
         return(
             <div className="comment">
-                <p className="comment-header">{this.props.result}</p>
-                <p className="comment-body">{this.props.protocol}</p>
+                <p className="comment-result">{this.props.result}</p>
+                <p className="comment-protocol">{this.props.protocol}</p>
+                <p className="comment-host">{this.props.host}</p>
                 <div className="comment-footer">
                     {/*
                     <a href="#" className="comment-footer-delete">
