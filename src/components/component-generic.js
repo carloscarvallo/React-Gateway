@@ -2,7 +2,7 @@ import React from 'react'
 import jQuery from 'jquery'
 import io from 'socket.io-client'
 
-const socket = io('http://localhost:8081')
+const socket = io('http://localhost:8081');
 
 export default class CommentBox extends React.Component {
 
@@ -62,7 +62,6 @@ export default class CommentBox extends React.Component {
 
     componentDidMount() {
         // polling
-
         socket.on('request', (request)=>{
           var request = JSON.parse(request)
           request.id = Date.now()
@@ -71,7 +70,6 @@ export default class CommentBox extends React.Component {
           })
           console.log('request', request)
         })
-
         // this._timer = setInterval(() => this._fetchComments(), 4000);
     }
     // Run when component is about to be removed
