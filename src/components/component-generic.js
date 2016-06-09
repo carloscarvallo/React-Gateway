@@ -1,8 +1,11 @@
-import React from 'react';
-import jQuery from 'jquery';
+import React from 'react'
+import jQuery from 'jquery'
+import io from 'socket.io-client'
+
+const socket = io('http://localhost:8081')
 
 export default class CommentBox extends React.Component {
-    
+
     constructor() {
         super();
         this.state = {
@@ -10,7 +13,7 @@ export default class CommentBox extends React.Component {
             comments: []
         };
     }
-    
+
     _fetchComments() {
         jQuery.ajax({
             method: 'GET',
@@ -20,19 +23,20 @@ export default class CommentBox extends React.Component {
             }
         });
     }
-    
+
     _handleClick() {
         this.setState({
             showComments: !this.state.showComments
         });
     }
-    
+
     _getComments() {
         return this.state.comments.map(( comment ) => {
             return(
-                <Comment 
+                <Comment
                     result={comment.result}
                     protocol={comment.protocol}
+                    method={comment.method}
                     host={comment.host}
                     url={comment.url}
                     id={comment.id}
@@ -40,7 +44,7 @@ export default class CommentBox extends React.Component {
             );
         });
     }
-    
+
     _getCommentsTitle( commentCount ) {
         if (commentCount === 0) {
             return 'No request yet';
@@ -50,21 +54,31 @@ export default class CommentBox extends React.Component {
             return `${commentCount} requests`;
         }
     }
-    
+
     // Fetch data from server before component is rendered.
     componentWillMount() {
-        this._fetchComments();
+        // this._fetchComments();
     }
-    
+
     componentDidMount() {
         // polling
-        this._timer = setInterval(() => this._fetchComments(), 4000);
+
+        socket.on('request', (request)=>{
+          var request = JSON.parse(request)
+          request.id = Date.now()
+          this.setState({
+            comments: this.state.comments.concat([request])
+          })
+          console.log('request', request)
+        })
+
+        // this._timer = setInterval(() => this._fetchComments(), 4000);
     }
     // Run when component is about to be removed
     componentWillUmount() {
         clearInterval(this._timer);
     }
-    
+
     render() {
         const comments = this._getComments();
         return(
@@ -77,6 +91,7 @@ export default class CommentBox extends React.Component {
                             <th>#</th>
                             <th>Result</th>
                             <th>Protocol</th>
+                            <th>Method</th>
                             <th>Host</th>
                             <th>URL</th>
                         </tr>
@@ -89,7 +104,7 @@ export default class CommentBox extends React.Component {
 }
 
 class Comment extends React.Component {
-    
+
     _getClass( data ) {
         let classN;
         switch (data) {
@@ -107,7 +122,7 @@ class Comment extends React.Component {
         }
         return classN;
     }
-    
+
     render() {
         return(
             <tbody>
@@ -115,6 +130,7 @@ class Comment extends React.Component {
                     <td>{this.props.id}</td>
                     <td>{this.props.result}</td>
                     <td>{this.props.protocol}</td>
+                    <td>{this.props.method}</td>
                     <td>{this.props.host}</td>
                     <td>{this.props.url}</td>
                 </tr>
