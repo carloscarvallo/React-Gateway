@@ -1,76 +1,59 @@
 import React from 'react'
-import jQuery from 'jquery'
 import io from 'socket.io-client'
 
 const socket = io('http://localhost:8081');
 
-export default class CommentBox extends React.Component {
+export default class LoggerBox extends React.Component {
 
     constructor() {
         super();
         this.state = {
-            showComments: false,
-            comments: []
+            showLoggers: false,
+            loggers: []
         };
     }
 
-    _fetchComments() {
-        jQuery.ajax({
-            method: 'GET',
-            url: 'comments.json',
-            success: (comments) => {
-                this.setState({ comments })
-            }
-        });
-    }
-
-    _handleClick() {
-        this.setState({
-            showComments: !this.state.showComments
-        });
-    }
-
-    _getComments() {
-        return this.state.comments.map(( comment ) => {
+    _getLoggers() {
+        return this.state.loggers.map(( logger ) => {
             return(
-                <Comment
-                    result={comment.result}
-                    protocol={comment.protocol}
-                    method={comment.method}
-                    host={comment.host}
-                    url={comment.url}
-                    id={comment.id}
-                    key={comment.id} />
+                <Logger
+                    ip={logger.ip}
+                    result={logger.result}
+                    protocol={logger.protocol}
+                    method={logger.method}
+                    host={logger.host}
+                    url={logger.url}
+                    id={logger.id}
+                    key={logger.id} />
             );
         });
     }
 
-    _getCommentsTitle( commentCount ) {
-        if (commentCount === 0) {
+    _getLoggersTitle( loggerCount ) {
+        if (loggerCount === 0) {
             return 'No request yet';
-        } else if (commentCount === 1) {
+        } else if (loggerCount === 1) {
             return '1 request';
         } else {
-            return `${commentCount} requests`;
+            return `${loggerCount} requests`;
         }
     }
 
     // Fetch data from server before component is rendered.
     componentWillMount() {
-        // this._fetchComments();
+        // this._fetchLoggers();
     }
 
     componentDidMount() {
         // polling
-        socket.on('request', (request)=>{
-            var request = JSON.parse(request)
-            request.id = Date.now()
+        socket.on('request', (request) => {
+            var request = JSON.parse(request);
+            request.id = Date.now();
             this.setState({
-                comments: this.state.comments.concat([request])
+                loggers: this.state.loggers.concat([request])
             });
             console.log('request', request);
         });
-        // this._timer = setInterval(() => this._fetchComments(), 4000);
     }
     // Run when component is about to be removed
     componentWillUmount() {
@@ -78,15 +61,16 @@ export default class CommentBox extends React.Component {
     }
 
     render() {
-        const comments = this._getComments();
+        const loggers = this._getLoggers();
         return(
-            <div className="comment-box">
+            <div className="logger-box">
                 <h3>Traffic</h3>
-                <h4 className="comment-count">{this._getCommentsTitle( comments.length )}</h4>
+                <h4 className="logger-count">{this._getLoggersTitle( loggers.length )}</h4>
                 <table className="table table-striped table-hover ">
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>IP</th>
                             <th>Result</th>
                             <th>Protocol</th>
                             <th>Method</th>
@@ -94,25 +78,25 @@ export default class CommentBox extends React.Component {
                             <th>URL</th>
                         </tr>
                     </thead>
-                    {comments}
+                    {loggers}
                 </table>
             </div>
         );
     }
 }
 
-class Comment extends React.Component {
+class Logger extends React.Component {
 
     _getClass( data ) {
         let classN;
         switch (data) {
-            case "200":
+            case 200:
                 classN = "success";
                 break;
-            case "302":
+            case 302:
                 classN = "info";
                 break;
-            case "404":
+            case 404:
                 classN = "danger";
                 break;
             default:
@@ -124,8 +108,9 @@ class Comment extends React.Component {
     render() {
         return(
             <tbody>
-                <tr className={this._getClass(this.props.result)}>
+                <tr className={this._getClass( this.props.result )}>
                     <td>{this.props.id}</td>
+                    <td>{this.props.ip}</td>
                     <td>{this.props.result}</td>
                     <td>{this.props.protocol}</td>
                     <td>{this.props.method}</td>
