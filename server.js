@@ -1,26 +1,18 @@
-var express = require('express');
-var morgan = require('morgan');
+var app = require('express')();
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
 
-var app = express();
-var io = require('socket.io')(8081);
-
-
-app.use(function(req, res, next) {
-    
-    console.log(req.protocol);
-    console.log(req.method);
-    console.log(req.url);
-    
+var gateway = function(req, res, next) {
     var request = {
         protocol : req.protocol,
         method : req.method,
         url : req.url
     };
-    io.on('connection', function(socket) {
-        socket.emit('request', JSON.stringify(request));
-    });
+    io.sockets.emit('request', JSON.stringify(request));
     next();
-});
+};
+
+app.use(gateway);
 
 app.get('/', function (req, res) {
   res.send('hello, world!');
@@ -30,6 +22,8 @@ app.get('/other', function (req, res) {
   res.send('hello, other');
 });
 
-app.listen(8080, function () {
-  console.log('Example app listening on port %s', 8080);
+io.on('connection', function() {
+    console.log('a client connected');
 });
+
+server.listen(8081);

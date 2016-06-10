@@ -63,18 +63,18 @@ export default class CommentBox extends React.Component {
     componentDidMount() {
         // polling
         socket.on('request', (request)=>{
-          var request = JSON.parse(request)
-          request.id = Date.now()
-          this.setState({
-            comments: this.state.comments.concat([request])
-          })
-          console.log('request', request)
-        })
+            var request = JSON.parse(request)
+            request.id = Date.now()
+            this.setState({
+                comments: this.state.comments.concat([request])
+            });
+            console.log('request', request);
+        });
         // this._timer = setInterval(() => this._fetchComments(), 4000);
     }
     // Run when component is about to be removed
     componentWillUmount() {
-        clearInterval(this._timer);
+        //clearInterval(this._timer);
     }
 
     render() {
