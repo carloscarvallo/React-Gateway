@@ -96,7 +96,13 @@ class Logger extends React.Component {
             case 302:
                 classN = "info";
                 break;
+            case 403:
+                classN = "warning";
+                break;
             case 404:
+                classN = "warning";
+                break;
+            case 500:
                 classN = "danger";
                 break;
             default:

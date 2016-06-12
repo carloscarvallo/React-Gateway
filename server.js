@@ -25,8 +25,20 @@ router.get('/', function (req, res) {
     res.send('hello, world!');
 });
 
-router.get('/other', function (req, res) {
-    res.send('hello, other');
+router.get('/privated', function (req, res) {
+    res.sendStatus(403);
+});
+
+router.get('/non', function (req, res) {
+    res.sendStatus(404);
+});
+
+router.get('/error', function (req, res) {
+    res.sendStatus(500);
+});
+
+router.get('/redirect', function (req, res) {
+    res.redirect('http://google.com');
 });
 
 app.use(router);
