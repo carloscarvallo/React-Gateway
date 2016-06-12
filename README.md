@@ -2,7 +2,7 @@
 
 [![Join the chat at https://gitter.im/carloscarvallo/React-Gateway](https://badges.gitter.im/carloscarvallo/React-Gateway.svg)](https://gitter.im/carloscarvallo/React-Gateway?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-HTTP request logger using React, right now is acting like a Express Middleware.
+HTTP request logger using React, right now you have to configure a Express Middleware that communicate to React through socket.io
 
 # Installing
 
